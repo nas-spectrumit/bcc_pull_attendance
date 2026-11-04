@@ -37,10 +37,14 @@ class ApiService {
     required String password,
   }) async {
     final url = Uri.parse('${ApiConfig.baseUrl}${ApiConfig.signInEndpoint}');
+    final basicAuthCredentials =
+        base64Encode(utf8.encode('${ApiConfig.basicAuthUsername}:${ApiConfig.basicAuthPassword}'));
+
     final response = await http.post(
       url,
       headers: {
         'Accept': 'application/json',
+        'Authorization': 'Basic $basicAuthCredentials',
       },
       body: {
         'email': email,
@@ -180,3 +184,4 @@ class ApiService {
     throw ApiException(errorMsg, statusCode: response.statusCode);
   }
 }
+
