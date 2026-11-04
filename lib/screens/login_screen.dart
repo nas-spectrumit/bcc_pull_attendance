@@ -76,30 +76,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Brand / Logo Icon
+                    // Brand / Logo
                     Center(
                       child: Container(
-                        height: 80,
-                        width: 80,
+                        height: 90,
+                        width: 90,
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [AppTheme.primary, Color(0xFF1E293B)],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(22),
+                          shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: AppTheme.primary.withValues(alpha: 0.25),
-                              blurRadius: 18,
+                              color: AppTheme.primary.withValues(alpha: 0.12),
+                              blurRadius: 20,
                               offset: const Offset(0, 8),
                             ),
                           ],
                         ),
-                        child: const Icon(
-                          Icons.fingerprint_rounded,
-                          size: 44,
-                          color: Colors.white,
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/images/main_logo.jpg',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
