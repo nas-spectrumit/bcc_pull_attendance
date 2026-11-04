@@ -102,7 +102,7 @@ class ApiService {
     }
 
     final url = Uri.parse('${ApiConfig.baseUrl}${ApiConfig.enrollStaffEndpoint}');
-    final response = await http.get(
+    final response = await http.post(
       url,
       headers: {
         'Accept': 'application/json',
@@ -143,18 +143,14 @@ class ApiService {
       throw ApiException('Unauthenticated. Please login again.', statusCode: 401);
     }
 
-    // present-staff endpoint with optional query or body
-    Uri url = Uri.parse('${ApiConfig.baseUrl}${ApiConfig.presentStaffEndpoint}');
-    if (date != null && date.isNotEmpty) {
-      url = url.replace(queryParameters: {'change_date': date});
-    }
-
-    final response = await http.get(
+    final url = Uri.parse('${ApiConfig.baseUrl}${ApiConfig.presentStaffEndpoint}');
+    final response = await http.post(
       url,
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
       },
+      body: date != null && date.isNotEmpty ? {'change_date': date} : null,
     );
 
     final dynamic body;
